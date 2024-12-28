@@ -1,6 +1,12 @@
 const http = require('http');
 const { Server } = require('socket.io');
 const express = require('express');
+const cors = require('cors');
+app.use(cors({
+  origin: "https://mer-fish.netlify.app/js-practice", // Replace with your Netlify domain
+  credentials: true, // If you're using cookies or authentication
+}));
+
 
 const app = express();
 const server = http.createServer(app);
