@@ -30,7 +30,7 @@ server.listen(port, () => {
 
 
 const products = [];
-const users = 0;
+let users = 0;
 
 
 io.on('connection', (socket) => {
