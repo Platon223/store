@@ -30,11 +30,13 @@ server.listen(port, () => {
 
 
 const products = [];
-
+const users;
 
 
 io.on('connection', (socket) => {
     console.log('User Connected');
+    users++;
+    socket.emit('users', users);
 
     socket.emit('launch', { products });
 
@@ -47,5 +49,9 @@ io.on('connection', (socket) => {
     socket.on('clear', () => {
         products.pop();
         console.log(products);
+    })
+
+    socket.on('disconnect', () => {
+        users -= 1;
     })
 })
