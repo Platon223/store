@@ -30,6 +30,7 @@ server.listen(port, () => {
 
 
 const products = [];
+let usernames = [];
 let users = 0;
 
 
@@ -49,6 +50,25 @@ io.on('connection', (socket) => {
     socket.on('clear', () => {
         products.pop();
         console.log(products);
+    })
+
+
+    socket.emit('see-accounts', usernames);
+
+
+    socket.on('delete-acc', accName => {
+        console.log(`The name: ${accName}, is going to be deleted`);
+        usernames = usernames.filter(obj => obj.nm !== accName);
+        console.log(usernames);
+    })
+
+    socket.on('request-accounts', () => {
+        socket.emit('launch-accounts', usernames);
+    })
+
+
+    socket.on('send-acc', user => {
+        usernames.push(user);
     })
 
     socket.on('disconnect', () => {
