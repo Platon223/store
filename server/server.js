@@ -29,7 +29,7 @@ server.listen(port, () => {
 
 
 
-const products = [];
+let products = [];
 let usernames = [];
 let users = 0;
 
@@ -45,6 +45,10 @@ io.on('connection', (socket) => {
         products.push(product);
         io.emit('added-product', product);
         console.log(products);
+    })
+
+    socket.on('remove-product', data => {
+        products = products.filter(obj => obj.nm !== data);
     })
 
     socket.on('clear', () => {
