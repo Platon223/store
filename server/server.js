@@ -41,6 +41,10 @@ io.on('connection', (socket) => {
 
     socket.emit('launch', { products });
 
+    socket.on('request-products', () => {
+        socket.emit('show-products', products);
+    })
+
     socket.on('add-product', (product) => {
         products.push(product);
         io.emit('added-product', product);
