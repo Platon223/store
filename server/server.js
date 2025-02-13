@@ -2,6 +2,8 @@ const http = require('http');
 const { Server } = require('socket.io');
 const express = require('express');
 const cors = require('cors');
+const fs = require("fs");
+const path = require("path");
 
 
 
@@ -14,7 +16,7 @@ const io = new Server(server, {
 });
 
 // Serve static files (if needed)
-app.use(express.static('public')); 
+app.use(express.static('products')); 
 
 app.use(cors({
   origin: "https://mer-fish.netlify.app/js-practice", // Replace with your Netlify domain
@@ -48,6 +50,29 @@ io.on('connection', (socket) => {
     socket.on('add-product', (product) => {
         products.push(product);
         io.emit('added-product', product);
+
+        const productHtml = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>${product.nm}</title>
+        </head>
+        <body>
+            <h1>${product.nm}</h1>
+            <p></p>
+            <p>Price: ${product.price}</p>
+        </body>
+        </html>`;
+    
+        // Create a filename and save the file
+        const fileName = `${product.nm.replace(/\s+/g, "_")}.html`;
+        const filePath = path.join(__dirname, "products", fileName);
+    
+        fs.writeFileSync(filePath, productHtml);
+    
+        console.log(`Product saved: ${fileName}`);
         console.log(products);
     })
 
