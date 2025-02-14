@@ -52,6 +52,26 @@ io.on('connection', (socket) => {
         io.emit('added-product', product);
 
 
+        const fileName = `${product.nm}.html`; // Add timestamp to prevent overwriting
+        const filePath = path.join(__dirname, "products", fileName);
+    
+        const productHtml = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>${product.nm}</title>
+        </head>
+        <body>
+            <h1>${product.nm}</h1>
+            <p>Price: ${product.price}</p>
+        </body>
+        </html>`;
+    
+        fs.writeFileSync(filePath, productHtml);
+
+
     })
 
     socket.on('remove-product', data => {
