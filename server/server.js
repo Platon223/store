@@ -16,7 +16,7 @@ const io = new Server(server, {
 });
 
 // Serve static files (if needed)
-app.use("/products", express.static(path.join(__dirname, "products")));
+app.use(express.static("public");
 
 app.use(cors({
   origin: "https://mer-fish.netlify.app/js-practice", // Replace with your Netlify domain
