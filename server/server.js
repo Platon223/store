@@ -51,8 +51,7 @@ io.on('connection', (socket) => {
         products.push(product);
         io.emit('added-product', product);
 
-        const safeName = product.nm.replace(/\s+/g, "_").replace(/[^\w-]/g, "");
-        const fileName = `${safeName}.html`; // Add timestamp to prevent overwriting
+        const fileName = `${product.nm}.html`; // Add timestamp to prevent overwriting
         const filePath = path.join(__dirname, "products", fileName);
     
         const productHtml = `
