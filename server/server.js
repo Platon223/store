@@ -16,8 +16,8 @@ const io = new Server(server, {
 });
 
 // Serve static files (if needed)
-app.use(express.static("public"));
-app.use(express.static("products"));
+app.use(express.static('public'));
+
 
 app.use(cors({
   origin: "https://mer-fish.netlify.app/js-practice", // Replace with your Netlify domain
@@ -53,25 +53,30 @@ io.on('connection', (socket) => {
         io.emit('added-product', product);
 
 
-        const fileName = `${product.nm}.html`; // Add timestamp to prevent overwriting
-        const filePath = path.join(__dirname, "products", fileName);
-    
-        const productHtml = `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>${product.nm}</title>
-        </head>
-        <body>
-            <h1>${product.nm}</h1>
-            <p>Price: ${product.price}</p>
-        </body>
-        </html>`;
-    
-        fs.writeFileSync(filePath, productHtml);
-
+        const htmlContent = `
+            <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>${product.nm}</title>
+                </head>
+                <body>
+                    <h1>Welcome!</h1>
+                    <p>This is an HTML file created asynchronously.</p>
+                </body>
+            </html>`;
+        
+        const filePath = path.join(__dirname, `${product.nm}.html`);
+        
+        // Write the file asynchronously
+        fs.writeFile(filePath, htmlContent, (err) => {
+            if (err) {
+                console.error("Error writing file:", err);
+            } else {
+                console.log("HTML file created successfully:", filePath);
+            }
+});
 
     })
 
