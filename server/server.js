@@ -68,7 +68,7 @@ io.on('connection', (socket) => {
                 </body>
             </html>`;
         
-        const filePath = path.join(__dirname, `${product.nm}.html`);
+        const filePath = path.join(__dirname, "products", `${product.nm}.html`);
         
         // Write the file asynchronously
         fs.writeFile(filePath, htmlContent, (err) => {
