@@ -16,7 +16,7 @@ const io = new Server(server, {
 });
 
 // Serve static files (if needed)
-app.use(express.static('products')); 
+app.use("/products", express.static(path.join(__dirname, "products")));
 
 app.use(cors({
   origin: "https://mer-fish.netlify.app/js-practice", // Replace with your Netlify domain
@@ -51,6 +51,10 @@ io.on('connection', (socket) => {
         products.push(product);
         io.emit('added-product', product);
 
+        const safeName = product.nm.replace(/\s+/g, "_").replace(/[^\w-]/g, "");
+        const fileName = `${safeName}_${Date.now()}.html`; // Add timestamp to prevent overwriting
+        const filePath = path.join(__dirname, "products", fileName);
+    
         const productHtml = `
         <!DOCTYPE html>
         <html lang="en">
@@ -61,19 +65,13 @@ io.on('connection', (socket) => {
         </head>
         <body>
             <h1>${product.nm}</h1>
-            <p></p>
             <p>Price: ${product.price}</p>
         </body>
         </html>`;
     
-        // Create a filename and save the file
-        const fileName = `${product.nm.replace(/\s+/g, "_")}.html`;
-        const filePath = path.join(__dirname, "products", fileName);
-    
         fs.writeFileSync(filePath, productHtml);
     
         console.log(`Product saved: ${fileName}`);
-        console.log(products);
     })
 
     socket.on('remove-product', data => {
