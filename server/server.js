@@ -4,6 +4,14 @@ const express = require('express');
 const cors = require('cors');
 const fs = require("fs");
 const path = require("path");
+const mongoose = require("mongoose");
+
+
+const mongoAPI = "mongodb+srv://platontikhnenko:<db_password>@cluster0.4i8et.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
+mongoose.connect(mongoAPI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log("Connected to MongoDB"))
+    .catch(err => console.log("something went wrong"));
 
 
 
