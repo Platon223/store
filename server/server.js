@@ -41,7 +41,7 @@ server.listen(port, () => {
 
 
 
-let products = [];
+const products = [];
 let usernames = [];
 let users = 0;
 
