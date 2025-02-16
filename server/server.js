@@ -7,7 +7,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 
 
-const mongoAPI = "mongodb://https://store-7.onrender.com/Cluster0";
+const mongoAPI = "mongodb://store-7.onrender.com/Cluster0";
 
 mongoose.connect(mongoAPI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("Connected to MongoDB"))
