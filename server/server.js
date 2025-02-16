@@ -11,7 +11,7 @@ const mongoAPI = "mongodb+srv://platontikhnenko:<SCRAM>@cluster0.4i8et.mongodb.n
 
 mongoose.connect(mongoAPI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("Connected to MongoDB"))
-    .catch(err => console.log("something went wrong:", err));
+    .catch(err => console.log("Something went wrong:", err));
 
 
 
