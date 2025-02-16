@@ -7,7 +7,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 
 
-const mongoAPI = "mongodb://store-7.onrender.com/Cluster0";
+const mongoAPI = "mongodb+srv://root:6424superdataproduct@productdata.4i8et.mongodb.net/productdata?retryWrites=true&w=majority&appName=productData";
 
 mongoose.connect(mongoAPI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("Connected to MongoDB"))
