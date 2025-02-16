@@ -62,7 +62,7 @@ io.on('connection', (socket) => {
         io.emit('added-product', product);
 });
 
-    })
+    
 
     socket.on('remove-product', data => {
         products = products.filter(obj => obj.nm !== data);
