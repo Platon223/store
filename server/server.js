@@ -60,31 +60,6 @@ io.on('connection', (socket) => {
     socket.on('add-product', (product) => {
         products.push(product);
         io.emit('added-product', product);
-
-
-        const htmlContent = `
-            <!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>${product.nm}</title>
-                </head>
-                <body>
-                    <h1>Welcome!</h1>
-                    <p>This is an HTML file created asynchronously.</p>
-                </body>
-            </html>`;
-        
-        const filePath = path.join(__dirname, "products", `${product.nm}.html`);
-        
-        // Write the file asynchronously
-        fs.writeFile(filePath, htmlContent, (err) => {
-            if (err) {
-                console.error("Error writing file:", err);
-            } else {
-                console.log("HTML file created successfully:", filePath);
-            }
 });
 
     })
