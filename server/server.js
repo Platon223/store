@@ -7,7 +7,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 
 
-const mongoAPI = "mongodb+srv://platontikhnenko:<SCRAM>@cluster0.4i8et.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const mongoAPI = "mongodb+srv://platontikhnenko:m6jK3NujPuFh_E4@cluster0.4i8et.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 mongoose.connect(mongoAPI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("Connected to MongoDB"))
