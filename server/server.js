@@ -20,7 +20,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: "*", // For production, specify the exact origin
+        origin: "https://mer-fish.netlify.app", // For production, specify the exact origin
     },
 });
 
