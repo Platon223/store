@@ -85,8 +85,7 @@ io.on('connection', (socket) => {
         } catch (error) {
             console.log("error occured while saving the product:", error);
         }
-        products.push(product);
-        io.emit('added-product', product);
+        
 });
 
     
