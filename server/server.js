@@ -5,6 +5,7 @@ const cors = require('cors');
 const fs = require("fs");
 const path = require("path");
 const mongoose = require("mongoose");
+const Product = require("./models/Product");
 
 
 const mongoAPI = "mongodb+srv://root:6424superdataproduct@productdata.4i8et.mongodb.net/productdata?retryWrites=true&w=majority&appName=productData";
@@ -22,6 +23,20 @@ const io = new Server(server, {
         origin: "*", // For production, specify the exact origin
     },
 });
+
+app.get("/products/:name", async (req, res) => {
+         const product = await Product.findOne({ nm: req.params.name });
+
+    
+         res.send(`<h1>${product.nm}</h1>`);
+    });
+
+
+ app.get("/api/products", async (req, res) => {
+        const products = await Product.find();
+
+        res.json(products);
+    });
 
 // Serve static files (if needed)
 
@@ -57,7 +72,19 @@ io.on('connection', (socket) => {
         socket.emit('show-products', products);
     })
 
-    socket.on('add-product', (product) => {
+    socket.on('add-product', async (product) => {
+        try {
+            const newProduct = new Product({
+                nm: product.nm,
+                price: product.price
+            });
+
+            await newProduct.save();
+
+            console.log("saved");
+        } catch (error) {
+            console.log("error occured while saving the product:", error);
+        }
         products.push(product);
         io.emit('added-product', product);
 });
