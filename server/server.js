@@ -24,6 +24,8 @@ const io = new Server(server, {
     },
 });
 
+app.use(cors());
+
 app.get("/products/:name", async (req, res) => {
          const product = await Product.findOne({ nm: req.params.name });
 
