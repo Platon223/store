@@ -92,7 +92,15 @@ io.on('connection', (socket) => {
 
     socket.on('remove-product', async (data) => {
 
-        const result = await Product.findOneAndDelete({nm: data});
+        try{
+            const result = await Product.findOneAndDelete({nm: data});
+
+            console.log("deleted succefully");
+        } catch (error) {
+            console.log(error);
+        }
+
+      
         
     })
 
