@@ -29,8 +29,13 @@ app.use(cors());
 app.get("/products/:name", async (req, res) => {
          const product = await Product.findOne({ nm: req.params.name });
 
-    
-         res.send(`<h1>${product.nm}</h1>`);
+         if(product.nm === null) {
+             console.log("The page doesn't exist");
+         } else {
+             res.send(`<h1>${product.nm}</h1>`);
+         }
+
+
     });
 
 
