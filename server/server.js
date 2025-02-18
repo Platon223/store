@@ -58,7 +58,7 @@ server.listen(port, () => {
 
 
 
-const products = [];
+
 let usernames = [];
 let users = 0;
 
@@ -92,14 +92,13 @@ io.on('connection', (socket) => {
 
     
 
-    socket.on('remove-product', data => {
-        products = products.filter(obj => obj.nm !== data);
+    socket.on('remove-product', async (data) => {
+
+        const result = await Product.findOneAndDelete({nm: data});
+        
     })
 
-    socket.on('clear', () => {
-        products.pop();
-        console.log(products);
-    })
+    
 
 
     socket.emit('see-accounts', usernames);
