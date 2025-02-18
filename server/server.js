@@ -58,7 +58,7 @@ server.listen(port, () => {
 
 
 
-
+const products = [];
 let usernames = [];
 let users = 0;
 
@@ -67,8 +67,6 @@ io.on('connection', (socket) => {
     console.log('User Connected');
     users++;
     socket.emit('users', users);
-
-    socket.emit('launch', { products });
 
     socket.on('request-products', () => {
         socket.emit('show-products', products);
