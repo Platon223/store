@@ -89,7 +89,8 @@ io.on('connection', (socket) => {
         try {
             const newProduct = new Product({
                 nm: product.nm,
-                price: product.price
+                price: product.price,
+                class: product.class
             });
 
             await newProduct.save();
