@@ -38,6 +38,14 @@ app.get("/products/:name", async (req, res) => {
 
     });
 
+app.get('/products/rods', async (req, res) => {
+    const rodProducts = await Product.find({class: 'rods'});
+
+    rodProducts.forEach(pr, () => {
+        res.send(`<h1>${pr.nm}<h1>`);
+    })
+});
+
 
  app.get("/api/products", async (req, res) => {
         const products = await Product.find();
