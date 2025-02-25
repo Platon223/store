@@ -41,7 +41,7 @@ app.get("/products/:name", async (req, res) => {
 app.get('/search/rods', async (req, res) => {
     const rodProducts = await Product.find({class: 'rods'});
 
-    rodProducts.forEach(pr, () => {
+    rodProducts.forEach(pr => {
         res.send(`<h1>${pr.nm}<h1>`);
     })
 });
