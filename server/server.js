@@ -42,7 +42,7 @@ app.get("/products/:name", async (req, res) => {
                     <body>
                         <h1 class="name">${product.nm}</h1>
                         <img src="" alt="" />
-                        <p>\`${product.likes}\`people liked this product.</p>
+                        <p>${product.likes} people liked this product.</p>
                         <button onclick="fetchProduct();">Like</button>
 
                         
