@@ -27,16 +27,52 @@ const io = new Server(server, {
 app.use(cors());
 
 app.get("/products/:name", async (req, res) => {
-         const product = await Product.findOne({ nm: req.params.name });
+    const product = await Product.findOne({ nm: req.params.name });
 
-         if(product.nm === null) {
-             console.log("The page doesn't exist");
-         } else {
-             res.send(`<h1>${product.nm}</h1>`);
-         }
+    if(product.nm === null) {
+        console.log("The page doesn't exist");
+    } else {
+        res.send(`<!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <title>Document</title>
+                    </head>
+                    <body>
+                        <h1 class="name">${product.nm}</h1>
+                        <img src="" alt="" />
+                        <p></p>
+                        <button onclick="fetchProduct();">Like</button>
+
+                        <script>
+                        let clicks = 0;
+
+                        async function fetchProduct() {
+                            const response = await fetch(
+                            "https://store-7.onrender.com/api/products"
+                            );
+                            const result = await response.json();
+                            const pr = result.find((val) => val.nm === product.nm);
+
+                            pr.likes++;
+
+                            const newProduct = {
+                            nm: pr.nm,
+                            price: pr.price,
+                            class: pr.class,
+                            likes: pr.likes,
+                            };
+
+                            socket.emit("uptade-product", newProduct);
+                        }
+                        </script>
+                    </body>
+                    </html>`);
+    }
 
 
-    });
+});
 
 app.get('/search/rods', async (req, res) => {
     const rodProducts = await Product.find({class: 'rods'});
@@ -100,6 +136,21 @@ io.on('connection', (socket) => {
         }
         
 });
+
+    socket.on('uptade-product', async (data) => {
+    const filter = {nm: data.nm};
+    const uptade = {
+        $set: {
+            nm: data.nm,
+            price: data.price,
+            class: data.class,
+            likes: data.likes
+        }
+       
+    }
+
+    const result = await Product.updateOne(filter, update);
+})
 
     
 
