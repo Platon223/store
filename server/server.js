@@ -142,7 +142,7 @@ io.on('connection', (socket) => {
 
     socket.on('uptade-product', async (data) => {
     const filter = {nm: data.nm};
-    const uptade = {
+    const update = {
         $set: {
             nm: data.nm,
             price: data.price,
