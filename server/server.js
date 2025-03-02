@@ -37,7 +37,6 @@ app.get("/products/:name", async (req, res) => {
                     <head>
                         <meta charset="UTF-8" />
                         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                        <script defer src="https://store-4-rc42.onrender.com/socket.io/socket.io.js"></script>
                         <title>Document</title>
                     </head>
                     <body>
@@ -46,6 +45,8 @@ app.get("/products/:name", async (req, res) => {
                         <p></p>
                         <button onclick="fetchProduct();">Like</button>
 
+                        
+                        <script src="https://store-4-rc42.onrender.com/socket.io/socket.io.js"></script>
                         <script>
                         const socket = io('https://store-7.onrender.com');
                         let clicks = 0;
