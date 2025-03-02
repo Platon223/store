@@ -53,7 +53,7 @@ app.get("/products/:name", async (req, res) => {
                             "https://store-7.onrender.com/api/products"
                             );
                             const result = await response.json();
-                            const pr = result.find((val) => val.nm === product.nm);
+                            const pr = result.find((val) => val.nm === ${product.nm});
 
                             pr.likes++;
 
