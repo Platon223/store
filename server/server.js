@@ -46,6 +46,7 @@ app.get("/products/:name", async (req, res) => {
                         <button onclick="fetchProduct();">Like</button>
 
                         <script>
+                        const socket = io('https://store-7.onrender.com');
                         let clicks = 0;
 
                         async function fetchProduct() {
