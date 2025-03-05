@@ -56,7 +56,7 @@ app.get("/products/:name", async (req, res) => {
                           let clicks = 0;
                     
                           async function loadComments() {
-                            const comZone = document.getElementById("coms");
+                            const comZone = document.getElementById("comms");
                     
                             const response = await fetch(
                               "https://store-7.onrender.com/api/products"
