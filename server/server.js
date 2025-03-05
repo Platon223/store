@@ -48,8 +48,11 @@ app.get("/products/:name", async (req, res) => {
                         <div id="comms"></div>
                         <input id="text" placeholder="Comment" type="text" />
                         <button onclick="addComment()">Post</button>
-                    
+
+                        
+                        <script src="https://store-4-rc42.onrender.com/socket.io/socket.io.js"></script>
                         <script>
+                          const socket = io('https://store-7.onrender.com');
                           let clicks = 0;
                     
                           async function loadComments() {
