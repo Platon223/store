@@ -34,43 +34,87 @@ app.get("/products/:name", async (req, res) => {
     } else {
         res.send(`<!DOCTYPE html>
                     <html lang="en">
-                    <head>
+                      <head>
                         <meta charset="UTF-8" />
                         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                         <title>Document</title>
-                    </head>
-                    <body>
-                        <h1 class="name">${product.nm}</h1>
+                      </head>
+                      <body>
+                        <h1 class="name"></h1>
                         <img src="" alt="" />
-                        <p>${product.likes} people liked this product.</p>
+                        <p></p>
                         <button onclick="fetchProduct();">Like</button>
-
-                        
-                        <script src="https://store-4-rc42.onrender.com/socket.io/socket.io.js"></script>
+                        <h2>What do you think about this product?</h2>
+                        <div id="comms"></div>
+                        <input id="text" placeholder="Comment" type="text" />
+                        <button onclick="addComment()">Post</button>
+                    
                         <script>
-                        const socket = io('https://store-7.onrender.com');
-                        let clicks = 0;
-
-                        async function fetchProduct() {
+                          let clicks = 0;
+                    
+                          async function loadComments() {
+                            const comZone = document.getElementById("coms");
+                    
                             const response = await fetch(
-                            "https://store-7.onrender.com/api/products"
+                              "https://store-7.onrender.com/api/products"
                             );
                             const result = await response.json();
-                            const pr = result.find((val) => val.nm === \`${product.nm}\`);
-
+                            const pr = result.find((val) => val.nm === product.nm);
+                    
+                            pr.comments.forEach((comm) => {
+                              const comEl = document.createElement("p");
+                              comEl.textContent = comm.text;
+                              comZone.appendChild(comEl);
+                            });
+                          }
+                    
+                          loadComments();
+                    
+                          async function fetchProduct() {
+                            const response = await fetch(
+                              "https://store-7.onrender.com/api/products"
+                            );
+                            const result = await response.json();
+                            const pr = result.find((val) => val.nm === product.nm);
+                    
                             pr.likes++;
-
+                    
                             const newProduct = {
-                            nm: pr.nm,
-                            price: pr.price,
-                            class: pr.class,
-                            likes: pr.likes,
+                              nm: pr.nm,
+                              price: pr.price,
+                              class: pr.class,
+                              likes: pr.likes,
+                              comments: pr.comments,
                             };
-
+                    
                             socket.emit("uptade-product", newProduct);
-                        }
+                          }
+                    
+                          async function addComment() {
+                            const text = document.getElementById("text").value;
+                    
+                            const response = await fetch(
+                              "https://store-7.onrender.com/api/products"
+                            );
+                            const result = await response.json();
+                            const pr = result.find((val) => val.nm === product.nm);
+                    
+                            const newComment = { nm: pr.nm, text: text };
+                    
+                            pr.comments.push(newComment);
+                    
+                            const newProduct = {
+                              nm: pr.nm,
+                              price: pr.price,
+                              class: pr.class,
+                              likes: pr.likes,
+                              comments: pr.comments,
+                            };
+                    
+                            socket.emit("uptade-product", newProduct);
+                          }
                         </script>
-                    </body>
+                      </body>
                     </html>`);
     }
 
@@ -147,7 +191,8 @@ io.on('connection', (socket) => {
             nm: data.nm,
             price: data.price,
             class: data.class,
-            likes: data.likes
+            likes: data.likes,
+            comments: data.comments
         }
        
     }
