@@ -5,7 +5,13 @@ const productSchema = new mongoose.Schema({
     nm: String,
     price: String,
     class: String,
-    likes: Number
+    likes: Number,
+    comments: {
+        type: [ 
+            { nm: String, text: String }
+        ],
+        required: true
+    }
 });
 
 
