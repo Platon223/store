@@ -293,7 +293,7 @@ app.get("/products/:name", async (req, res) => {
                             
                               let cartArr = JSON.parse(localStorage.getItem('cart-stuff'));
                     
-                              const addProduct = {nm: product.nm};
+                              const addProduct = {nm: \`${product.nm}\`};
                     
                               cartArr.push(addProduct);
                     
