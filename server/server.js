@@ -291,7 +291,7 @@ app.get("/products/:name", async (req, res) => {
                             <a
                               onclick="
                             
-                              let cartArr = JSON.parse(localStorage.getItem('cart-stuff'));
+                              let cartArr = JSON.parse(localStorage.getItem('cart-stuff')) || [];
                     
                               const addProduct = {nm: \`${product.nm}\`};
                     
