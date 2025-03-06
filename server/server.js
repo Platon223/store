@@ -445,7 +445,7 @@ let users = 0;
 
 
 io.on('connection', (socket) => {
-    console.log('User connected');
+    console.log('User Connected');
     users++;
     socket.emit('users', users);
 
