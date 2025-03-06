@@ -397,17 +397,9 @@ app.get("/products/:name", async (req, res) => {
                       </body>
                     </html>
 `)
-    }
-        
+    }});
 
-
-
-
-
-
-
-
-
+    
 
 
 
