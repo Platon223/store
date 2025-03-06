@@ -203,6 +203,40 @@ app.get("/products/:name", async (req, res) => {
                             font-size: 1rem;
                             line-height: 1.4;
                           }
+
+
+                          .comment-form {
+                            margin-top: 30px;
+                        }
+                
+                        .comment-form textarea {
+                            width: 100%;
+                            height: 100px;
+                            padding: 10px;
+                            font-size: 1rem;
+                            background-color: #2a2a2a;
+                            border: 1px solid #444;
+                            color: #fff;
+                            border-radius: 8px;
+                            resize: none;
+                            margin-bottom: 10px;
+                        }
+                
+                        .comment-form button {
+                            padding: 12px 20px;
+                            font-size: 1rem;
+                            background-color: #4caf50;
+                            color: white;
+                            font-weight: bold;
+                            border-radius: 8px;
+                            cursor: pointer;
+                            transition: background 0.3s;
+                            border: none;
+                        }
+                
+                        .comment-form button:hover {
+                            background-color: #388e3c;
+                        }
                     
                           /* Responsive */
                           @media (max-width: 768px) {
@@ -219,6 +253,10 @@ app.get("/products/:name", async (req, res) => {
                             .comments-container {
                               flex-direction: column;
                               align-items: center;
+                            }
+
+                            .comment-form {
+                                text-align: center;
                             }
                           }
                     
@@ -311,6 +349,11 @@ app.get("/products/:name", async (req, res) => {
                         <div class="comments-section">
                           <h2 class="comments-title">Customer Reviews</h2>
                           <div id="comms" class="comments-container"></div>
+
+                          <div class="comment-form">
+                            <textarea id="userComment" placeholder="Write your comment..."></textarea>
+                            <button onclick="addComment();">Submit Comment</button>
+                          </div>
                         </div>
                     
                         <!-- Footer -->
@@ -371,7 +414,7 @@ app.get("/products/:name", async (req, res) => {
                           }
                     
                           async function addComment() {
-                            const text = document.getElementById("text").value;
+                            const text = document.getElementById("userComment").value;
                     
                             const response = await fetch(
                               "https://store-7.onrender.com/api/products"
