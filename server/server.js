@@ -454,7 +454,208 @@ app.get("/products/:name", async (req, res) => {
 app.get('/search/rods', async (req, res) => {
     const rodProducts = await Product.find({class: 'rods'});
 
-    res.json(rodProducts);
+    res.send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fishing Rods</title>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #f5f5f5;
+        }
+
+        /* Navbar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: #1e1e1e;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4caf50;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #f5f5f5;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4caf50;
+        }
+
+        /* Product Grid */
+        .product-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product-card {
+            background-color: #1e1e1e;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            color: #4caf50;
+            margin-bottom: 10px;
+        }
+
+        .product-details {
+            display: inline-block;
+            padding: 10px 15px;
+            font-size: 1rem;
+            background-color: #4caf50;
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+
+        .product-details:hover {
+            background-color: #388e3c;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1e1e1e;
+            margin-top: 50px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .product-container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <div class="logo"><img style="width: 80px;
+        border-radius: 100px;" src="https://i.postimg.cc/q70Px70L/mer-fish-logo-123.png" alt="qr code" /></div>
+        <nav class="nav-links">
+            <a href="https://mer-fish.netlify.app/js-practice.html">Home</a>
+            <a href="https://mer-fish.netlify.app/js-practice.html">Shop</a>
+            <a href="#">Cart</a>
+        </nav>
+    </header>
+
+    <!-- Product Grid -->
+    <div class="product-container">
+        <!-- Product 1 -->
+        <div class="product-card">
+            <img src="" alt="Product 1" class="product-image">
+            <h2 class="product-title">Product One</h2>
+            <p class="product-price">$29.99</p>
+            <a href="product1.html" class="product-details">View Details</a>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card">
+            <img src="" alt="Product 2" class="product-image">
+            <h2 class="product-title">Product Two</h2>
+            <p class="product-price">$39.99</p>
+            <a href="product2.html" class="product-details">View Details</a>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card">
+            <img src="" alt="Product 3" class="product-image">
+            <h2 class="product-title">Product Three</h2>
+            <p class="product-price">$49.99</p>
+            <a href="product3.html" class="product-details">View Details</a>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product-card">
+            <img src="https://via.placeholder.com/300x200/0000ff" alt="Product 4" class="product-image">
+            <h2 class="product-title">Product Four</h2>
+            <p class="product-price">$59.99</p>
+            <a href="product4.html" class="product-details">View Details</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 MyStore | All rights reserved.
+    </footer>
+
+     <script>
+      const prZone = document.querySelector('.product-container');
+
+      async function loadPr() {
+        rodProducts.forEach(pr => {
+          const prEl = document.createElement('div')
+          prEl.className = 'product-card';
+          prEl.innerHTML = \`<img src="" alt="Product 1" class="product-image">
+            <h2 class="product-title">\${pr.nm}</h2>
+            <p class="product-price">$\${pr.price}</p>
+            <a href="https://store-7.onrender.com/products/\${pr.nm}" class="product-details">View Details</a>\`;
+          
+          prZone.appendChild(prEl);
+        })
+      }
+
+      loadPr();
+      
+      </script>
+
+</body>
+</html>
+`)
 });
 
 
