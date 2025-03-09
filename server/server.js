@@ -637,7 +637,7 @@ app.get('/search/rods', async (req, res) => {
       const prZone = document.querySelector('.product-container');
 
       async function loadPr() {
-        rodProducts.forEach(pr => {
+        ${rodProducts}.forEach(pr => {
           const prEl = document.createElement('div')
           prEl.className = 'product-card';
           prEl.innerHTML = \`<img src="" alt="Product 1" class="product-image">
