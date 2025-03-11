@@ -329,15 +329,15 @@ app.get("/products/:name", async (req, res) => {
                             <button
                               onclick="
                             
-                              let cartArr = JSON.parse(localStorage.getItem('cart-stuff')) || [];
+                              let cartArr = JSON.parse(localStorage.getItem('cart-body'));
                     
                               const addProduct = {nm: \`${product.nm}\`, price: \`${product.price}\`, q: 1};
                     
                               cartArr.push(addProduct);
                     
-                              localStorage.setItem('cart-stuff', JSON.stringify(cartArr));
+                              localStorage.setItem('cart-body', JSON.stringify(cartArr));
 
-                              console.log(JSON.parse(localStorage.getItem('cart-stuff')));
+                              console.log(JSON.parse(localStorage.getItem('cart-body')));
 
                               console.log('hello');
                     
