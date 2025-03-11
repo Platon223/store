@@ -337,6 +337,8 @@ app.get("/products/:name", async (req, res) => {
                     
                               localStorage.setItem('cart-stuff', JSON.stringify(cartArr));
 
+                              console.log(JSON.parse(localStorage.getItem('cart-stuff')));
+
                               console.log('hello');
                     
                             "
