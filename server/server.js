@@ -329,7 +329,7 @@ app.get("/products/:name", async (req, res) => {
                             <button
                               onclick="
                             
-                              let cartArr = JSON.parse(localStorage.getItem('cart-body'));
+                              let cartArr = JSON.parse(localStorage.getItem('cart-body')) || [];
                     
                               const addProduct = {nm: \`${product.nm}\`, price: \`${product.price}\`, q: 1};
                     
