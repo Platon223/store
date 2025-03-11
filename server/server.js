@@ -310,7 +310,7 @@ app.get("/products/:name", async (req, res) => {
                                 onclick="changeImage(this)"
                               />
                               <img
-                                src="https://via.placeholder.com/80/00ff00"
+                                src=""
                                 alt="Gallery Image 3"
                                 class="gallery-image"
                                 onclick="changeImage(this)"
