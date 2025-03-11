@@ -326,21 +326,23 @@ app.get("/products/:name", async (req, res) => {
                               This is an amazing product that will improve your life! It features
                               high-quality materials, long-lasting durability, and a sleek design.
                             </p>
-                            <a
+                            <button
                               onclick="
                             
                               let cartArr = JSON.parse(localStorage.getItem('cart-stuff')) || [];
                     
-                              const addProduct = {nm: \`${product.nm}\`};
+                              const addProduct = {nm: \`${product.nm}\`, price: \`${product.price}\`, q: 1};
                     
                               cartArr.push(addProduct);
                     
                               localStorage.setItem('cart-stuff', JSON.stringify(cartArr));
+
+                              console.log('hello');
                     
                             "
-                              href="#"
+                              
                               class="add-to-cart"
-                              >Add to Cart</a
+                              >Add to Cart</button
                             >
                           </div>
                         </div>
