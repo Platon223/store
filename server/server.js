@@ -665,6 +665,339 @@ app.get('/search/rods', async (req, res) => {
 });
 
 
+app.get('/cart', async (req, res) => {
+    res.send(`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - MyStore</title>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #f5f5f5;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: #1e1e1e;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4caf50;
+        }
+
+        .navbar {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #f5f5f5;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4caf50;
+        }
+
+        /* Cart Page */
+        .cart-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .cart-items {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .cart-items h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid #333;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .cart-item-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-left: 20px;
+            width: 60%;
+        }
+
+        .cart-item-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            font-size: 1.1rem;
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-input {
+            width: 50px;
+            padding: 5px;
+            text-align: center;
+            background-color: #333;
+            border: 1px solid #444;
+            border-radius: 5px;
+            color: white;
+        }
+
+        /* Cart Summary */
+        .cart-summary {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .cart-summary h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .total-price {
+            font-size: 1.5rem;
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 1.2rem;
+            background-color: #4caf50;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background 0.3s;
+            margin-top: 20px;
+        }
+
+        .checkout-btn:hover {
+            background-color: #388e3c;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1e1e1e;
+            margin-top: 50px;
+        }
+
+        .social-icons {
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            color: #f5f5f5;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #4caf50;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">MyStore</div>
+        <div class="navbar">
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Cart</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Cart Page Content -->
+    <div class="cart-container">
+        <!-- Cart Items -->
+        <div class="cart-items">
+            <h2>Your Cart</h2>
+
+            <div class="cart-item">
+                <img src="" alt="Product Image">
+                <div class="cart-item-details">
+                    <span class="cart-item-title">Product 1</span>
+                    <span class="cart-item-price">$19.99</span>
+                    <div class="cart-item-quantity">
+                        <button>-</button>
+                        <input type="text" class="quantity-input" value="1">
+                        <button>+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart-item">
+                <img src="" alt="Product Image">
+                <div class="cart-item-details">
+                    <span class="cart-item-title">Product 2</span>
+                    <span class="cart-item-price">$24.99</span>
+                    <div class="cart-item-quantity">
+                        <button>-</button>
+                        <input type="text" class="quantity-input" value="1">
+                        <button>+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart-item">
+                <img src="" alt="Product Image">
+                <div class="cart-item-details">
+                    <span class="cart-item-title">Product 3</span>
+                    <span class="cart-item-price">$14.99</span>
+                    <div class="cart-item-quantity">
+                        <button>-</button>
+                        <input type="text" class="quantity-input" value="1">
+                        <button>+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cart Summary -->
+        <div class="cart-summary">
+            <h3>Order Summary</h3>
+            <div class="summary-item">
+                <span>Subtotal</span>
+                <span>$59.97</span>
+            </div>
+            <div class="summary-item">
+                <span>Shipping</span>
+                <span>$5.00</span>
+            </div>
+            <div class="summary-item">
+                <span>Total</span>
+                <span class="total-price">$64.97</span>
+            </div>
+            <a href="#" class="checkout-btn">Proceed to Checkout</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 MyStore | Follow us:
+        <div class="social-icons">
+            <a href="#">📘</a>
+            <a href="#">🐦</a>
+        </div>
+    </footer>
+
+    <script>
+        const cart = JSON.parse(localStorage.getItem('cart-body'));
+        const summary = document.querySelector('.cart-items');
+
+        cart.forEach(pr => {
+            const el = document.createElement('div');
+            el.className = 'cart-item';
+            el.innerHTML = \`<div class="cart-item">
+                <img src="" alt="Product Image" />
+                <div class="cart-item-details">
+                    <span class="cart-item-title">\${pr.nm}</span>
+                    <span class="cart-item-price">$\${pr.price}</span>
+                    <div class="cart-item-quantity">
+                    <button onclick="\${pr.q} -= 1;">-</button>
+                    <input type="text" class="quantity-input" value="\${pr.q}" />
+                    <button onclick="\${pr.q} += 1;">+</button>
+                    </div>
+                </div>
+                </div>\`;
+
+            summary.appendChild(el);
+
+            localStorage.setItem('cart-body', JSON.stringify(cart));
+        });
+
+    
+    </script>
+
+</body>
+</html>
+`)
+});
+
+
+
+
  app.get("/api/products", async (req, res) => {
         const products = await Product.find();
 
