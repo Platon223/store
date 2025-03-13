@@ -975,9 +975,9 @@ app.get('/cart', async (req, res) => {
                     <span class="cart-item-title">\${pr.nm}</span>
                     <span class="cart-item-price">$\${pr.price}</span>
                     <div class="cart-item-quantity">
-                    <button onclick="uptadeVal(\${pr.nm}, -1);">-</button>
+                    <button onclick="uptadeVal('\${pr.nm}', -1);">-</button>
                     <input type="text" class="quantity-input" value="\${pr.q}" />
-                    <button onclick="uptadeVal(\${pr.nm}, 1);">+</button>
+                    <button onclick="uptadeVal('\${pr.nm}', 1);">+</button>
                     </div>
                 </div>
                \`;
