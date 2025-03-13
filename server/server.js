@@ -281,8 +281,8 @@ app.get("/products/:name", async (req, res) => {
                           </div>
                           <nav class="nav-links">
                             <a href="#">Home</a>
-                            <a href="#">Shop</a>
-                            <a href="#">Cart</a>
+                            <a href="https://mer-fish.netlify.app/js-practice.html">Shop</a>
+                            <a href="https://store-7.onrender.com/cart">Cart</a>
                           </nav>
                         </header>
                     
@@ -593,7 +593,7 @@ app.get('/search/rods', async (req, res) => {
         <nav class="nav-links">
             <a href="https://mer-fish.netlify.app/js-practice.html">Home</a>
             <a href="https://mer-fish.netlify.app/js-practice.html">Shop</a>
-            <a href="#">Cart</a>
+            <a href="https://store-7.onrender.com/cart">Cart</a>
         </nav>
     </header>
 
@@ -881,8 +881,8 @@ app.get('/cart', async (req, res) => {
             <nav>
                 <ul class="nav-links">
                     <li><a href="#">Home</a></li>
-                    <li><a href="#">Shop</a></li>
-                    <li><a href="#">Cart</a></li>
+                    <li><a href="https://mer-fish.netlify.app/js-practice.html">Shop</a></li>
+                    <li><a href="https://store-7.onrender.com/cart">Cart</a></li>
                 </ul>
             </nav>
         </div>
@@ -894,44 +894,7 @@ app.get('/cart', async (req, res) => {
         <div class="cart-items">
             <h2>Your Cart</h2>
 
-            <div class="cart-item">
-                <img src="" alt="Product Image">
-                <div class="cart-item-details">
-                    <span class="cart-item-title">Product 1</span>
-                    <span class="cart-item-price">$19.99</span>
-                    <div class="cart-item-quantity">
-                        <button>-</button>
-                        <input type="text" class="quantity-input" value="1">
-                        <button>+</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="cart-item">
-                <img src="" alt="Product Image">
-                <div class="cart-item-details">
-                    <span class="cart-item-title">Product 2</span>
-                    <span class="cart-item-price">$24.99</span>
-                    <div class="cart-item-quantity">
-                        <button>-</button>
-                        <input type="text" class="quantity-input" value="1">
-                        <button>+</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="cart-item">
-                <img src="" alt="Product Image">
-                <div class="cart-item-details">
-                    <span class="cart-item-title">Product 3</span>
-                    <span class="cart-item-price">$14.99</span>
-                    <div class="cart-item-quantity">
-                        <button>-</button>
-                        <input type="text" class="quantity-input" value="1">
-                        <button>+</button>
-                    </div>
-                </div>
-            </div>
+            
         </div>
 
         <!-- Cart Summary -->
