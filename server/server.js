@@ -871,19 +871,22 @@ app.get('/cart', async (req, res) => {
             color: #4caf50;
         }
 
-            .btn-delete {
-                padding: 8px 12px;
-                background-color: #d32f2f;
-                color: white;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background 0.3s;
-            }
+      .btn-delete {
+            padding: 6px 10px;
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 0.9rem;
+            width: auto;
+        }
 
         .btn-delete:hover {
             background-color: #b71c1c;
         }
+
 
     </style>
 </head>
@@ -916,8 +919,8 @@ app.get('/cart', async (req, res) => {
         <div class="cart-summary">
             <h3>Order Summary</h3>
             <div class="summary-item">
-                <span>Subtotal</span>
-                <span>$59.97</span>
+                <span>Taxes</span>
+                <span>$5.00</span>
             </div>
             <div class="summary-item">
                 <span>Shipping</span>
@@ -967,7 +970,7 @@ app.get('/cart', async (req, res) => {
 
             let price = pr.q * Number(pr.price);
             totalPrice += price;
-            totalZone.innerHTML = totalPrice;
+            totalZone.innerHTML = \`$\${totalPrice}\`;
 
             summary.appendChild(el);
 
