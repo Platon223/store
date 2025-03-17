@@ -928,7 +928,7 @@ app.get('/cart', async (req, res) => {
     <script>
         const cart = JSON.parse(localStorage.getItem('cart-body'));
         const summary = document.querySelector('.cart-items');
-        const totalPrice = Number(localStorage.getItem('total'));
+        let totalPrice = Number(localStorage.getItem('total'));
         const totalZone = document.querySelector('.total-price');
         totalZone.innerHTML = totalPrice;
 
@@ -948,7 +948,7 @@ app.get('/cart', async (req, res) => {
                 </div>
                \`;
 
-            const price = pr.q * Number(pr.price);
+            let price = pr.q * Number(pr.price);
             totalPrice += price;
             localStorage.setItem('total', totalPrice);
             totalZone.innerHTML = totalPrice;
