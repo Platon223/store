@@ -960,7 +960,7 @@ app.get('/cart', async (req, res) => {
                     <input type="text" class="quantity-input" value="\${pr.q}" />
                     <button onclick="uptadeVal('\${pr.nm}', 1);">+</button>
                     </div>
-                    <button onclick="cart = cart.filter(prod => prod.nm === '\${pr.nm}');
+                    <button onclick="cart = cart.filter(prod => prod.nm !== '\${pr.nm}');
                                     localStorage.setItem('cart-body', JSON.stringify(cart));" class="btn-delete">Delete</button>
                 </div>
                \`;
