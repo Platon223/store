@@ -928,9 +928,9 @@ app.get('/cart', async (req, res) => {
     <script>
         const cart = JSON.parse(localStorage.getItem('cart-body'));
         const summary = document.querySelector('.cart-items');
-        let totalPrice = Number(localStorage.getItem('total'));
+        let totalPrice = 0;
         const totalZone = document.querySelector('.total-price');
-        totalZone.innerHTML = totalPrice;
+        totalZone.innerHTML = \` $\${totalPrice}\`;
 
         cart.forEach(pr => {
             const el = document.createElement('div');
@@ -950,7 +950,6 @@ app.get('/cart', async (req, res) => {
 
             let price = pr.q * Number(pr.price);
             totalPrice += price;
-            localStorage.setItem('total', totalPrice);
             totalZone.innerHTML = totalPrice;
 
             summary.appendChild(el);
