@@ -1017,7 +1017,7 @@ let users = 0;
 
 
 io.on('connection', (socket) => {
-    console.log('user connected');
+    console.log('User connected');
     users++;
     socket.emit('users', users);
 
