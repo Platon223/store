@@ -928,6 +928,9 @@ app.get('/cart', async (req, res) => {
     <script>
         const cart = JSON.parse(localStorage.getItem('cart-body'));
         const summary = document.querySelector('.cart-items');
+        const totalPrice = Number(localStorage.getItem('total'));
+        const totalZone = document.querySelector('.total-price');
+        totalZone.innerHTML = totalPrice;
 
         cart.forEach(pr => {
             const el = document.createElement('div');
@@ -944,6 +947,11 @@ app.get('/cart', async (req, res) => {
                     </div>
                 </div>
                \`;
+
+            const price = pr.q * Number(pr.price);
+            totalPrice += price;
+            localStorage.setItem('total', totalPrice);
+            totalZone.innerHTML = totalPrice;
 
             summary.appendChild(el);
 
@@ -967,7 +975,6 @@ app.get('/cart', async (req, res) => {
             location.reload();
 
 }
-
 
     
     </script>
