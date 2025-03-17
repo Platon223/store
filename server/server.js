@@ -870,6 +870,21 @@ app.get('/cart', async (req, res) => {
         .social-icons a:hover {
             color: #4caf50;
         }
+
+            .btn-delete {
+                padding: 8px 12px;
+                background-color: #d32f2f;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background 0.3s;
+            }
+
+        .btn-delete:hover {
+            background-color: #b71c1c;
+        }
+
     </style>
 </head>
 <body>
@@ -945,6 +960,7 @@ app.get('/cart', async (req, res) => {
                     <input type="text" class="quantity-input" value="\${pr.q}" />
                     <button onclick="uptadeVal('\${pr.nm}', 1);">+</button>
                     </div>
+                    <button onclick="cart.filter(prod => prod.nm === pr.nm)" class="btn-delete">Delete</button>
                 </div>
                \`;
 
