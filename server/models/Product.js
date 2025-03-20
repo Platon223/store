@@ -15,7 +15,16 @@ const productSchema = new mongoose.Schema({
 });
 
 
+const userSchema = new mongoose.Schema({
+    email: String,
+    firstName: String,
+    lastName: String,
+});
+
+
+
 const Product = mongoose.model("Product", productSchema);
-module.exports = Product;
+const User = mongoose.model("User", userSchema);
+module.exports = { Product, User };
 
 
