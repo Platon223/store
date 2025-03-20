@@ -5,7 +5,7 @@ const cors = require('cors');
 const fs = require("fs");
 const path = require("path");
 const mongoose = require("mongoose");
-const Product = require("./models/Product");
+const { Product, User } = require("./models/Product");
 
 
 const mongoAPI = "mongodb+srv://root:6424superdataproduct@productdata.4i8et.mongodb.net/productdata?retryWrites=true&w=majority&appName=productData";
@@ -25,6 +25,9 @@ const io = new Server(server, {
 });
 
 app.use(cors());
+
+
+
 
 app.get("/products/:name", async (req, res) => {
     const product = await Product.findOne({ nm: req.params.name });
@@ -1043,6 +1046,17 @@ io.on('connection', (socket) => {
     socket.on('request-products', () => {
         socket.emit('show-products', products);
     })
+
+
+    socket.on('createAcc', async (data) => {
+        const newAcc = new User({
+            email: data.email,
+            firstName: data.fname,
+            lastName: data.lname
+        });
+
+        await newAcc.save();
+    });
 
     socket.on('add-product', async (product) => {
         try {
