@@ -18,7 +18,7 @@ const productSchema = new mongoose.Schema({
 const userSchema = new mongoose.Schema({
     email: String,
     firstName: String,
-    lastName: String,
+    lastName: String
 });
 
 
