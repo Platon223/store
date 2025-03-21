@@ -1051,8 +1051,8 @@ io.on('connection', (socket) => {
     socket.on('createAcc', async (data) => {
         const newAcc = new User({
             email: data.email,
-            firstName: data.fname,
-            lastName: data.lname
+            password: data.password,
+            name: data.name
         });
 
         await newAcc.save();
