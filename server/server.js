@@ -1049,13 +1049,20 @@ io.on('connection', (socket) => {
 
 
     socket.on('createAcc', async (data) => {
-        const newAcc = new User({
-            email: data.email,
-            password: data.password,
-            name: data.name
-        });
 
-        await newAcc.save();
+        try {
+            const newAcc = new User({
+                email: data.email,
+                password: data.password,
+                name: data.name
+            });
+
+            await newAcc.save();
+        } catch(err) {
+            console.log(err);
+        }
+       
+        
     });
 
     socket.on('add-product', async (product) => {
