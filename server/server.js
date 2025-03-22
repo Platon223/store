@@ -27,6 +27,13 @@ const io = new Server(server, {
 app.use(cors());
 
 
+app.get('/users', async (req, res) => {
+    const allUsers = await User.find();
+
+    res.json(allUsers);
+})
+
+
 
 
 app.get("/products/:name", async (req, res) => {
