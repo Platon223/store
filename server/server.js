@@ -1055,6 +1055,11 @@ io.on('connection', (socket) => {
     })
 
 
+    socket.on('logout-user', async (data) => {
+        const deletedUser = await User.findOneAndDelete({password: data.password});
+    })
+
+
     socket.on('createAcc', async (data) => {
 
         try {
