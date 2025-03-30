@@ -1005,6 +1005,10 @@ app.get('/cart', async (req, res) => {
 
 }
 
+const cart = [{nm: 'banana', price: '1'}];
+
+localStorage.setItem('cart-body', JSON.stringify(cart));
+
 
 function toShopHistory() {
     const previousShop = JSON.parse(localStorage.getItem('cart-body'));
