@@ -940,7 +940,7 @@ app.get('/cart', async (req, res) => {
                 <span>Total</span>
                 <span class="total-price">$64.97</span>
             </div>
-            <a href="#" class="checkout-btn">Proceed to Checkout</a>
+            <button onclick="toShopHistory();" class="checkout-btn">Proceed to Checkout</button>
         </div>
     </div>
 
@@ -1003,6 +1003,22 @@ app.get('/cart', async (req, res) => {
         
             location.reload();
 
+}
+
+
+function toShopHistory() {
+    const previousShop = JSON.parse(localStorage.getItem('cart-body'));
+    const shopHist = JSON.parse(localStorage.getItem('shoppingHist')) || [];
+
+
+    previousShop.forEach(item => {
+        shopHist.push(item);
+
+    });
+
+    localStorage.setItem('shoppingHist', JSON.stringify(shopHist));
+
+    
 }
 
     
