@@ -1014,6 +1014,289 @@ app.get('/cart', async (req, res) => {
 });
 
 
+app.get('/shop-history', (req, res) => {
+    res.send(`<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping History - MyStore</title>
+    <style>
+      /* General Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #121212;
+        color: #f5f5f5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        min-height: 100vh;
+      }
+
+      /* Navbar */
+      nav {
+        width: 100%;
+        background-color: #1e1e1e;
+        padding: 15px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+      }
+
+      .logo {
+        color: #4caf50;
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      .menu {
+        display: flex;
+        list-style: none;
+      }
+
+      .menu li {
+        margin: 0 15px;
+      }
+
+      .menu li a {
+        text-decoration: none;
+        color: #f5f5f5;
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding: 12px 20px;
+        border-radius: 8px;
+        transition: background 0.3s;
+      }
+
+      .menu li a:hover {
+        background-color: #4caf50;
+      }
+
+      /* Hamburger Icon */
+      .hamburger {
+        display: none;
+        font-size: 2rem;
+        cursor: pointer;
+        color: #f5f5f5;
+      }
+
+      /* Responsive Menu */
+      @media (max-width: 768px) {
+        .menu {
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          top: 60px;
+          right: 0;
+          background-color: #1e1e1e;
+          width: 100%;
+          text-align: center;
+          padding: 10px 0;
+        }
+
+        .menu.active {
+          display: flex;
+        }
+
+        .menu li {
+          margin: 10px 0;
+        }
+
+        .hamburger {
+          display: block;
+        }
+      }
+
+      /* Header */
+      header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      header h1 {
+        font-size: 2rem;
+        color: #4caf50;
+      }
+
+      header p {
+        font-size: 1rem;
+        color: #ccc;
+      }
+
+      /* Shopping History List */
+      .history-list {
+        width: 80%;
+        max-width: 1200px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 40px;
+      }
+
+      .history-item {
+        background-color: #1e1e1e;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s;
+      }
+
+      .history-item:hover {
+        transform: translateY(-10px);
+      }
+
+      .history-item img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 15px;
+      }
+
+      .history-item h3 {
+        font-size: 1.2rem;
+        color: #4caf50;
+        margin-bottom: 10px;
+      }
+
+      .history-item p {
+        font-size: 1rem;
+        color: #ccc;
+        margin-bottom: 5px;
+      }
+
+      .history-item span {
+        font-weight: bold;
+        color: #fff;
+      }
+
+      .history-item .price {
+        font-size: 1.2rem;
+        color: #4caf50;
+        font-weight: bold;
+      }
+
+      /* Button Styles */
+      .back-btn {
+        padding: 12px 20px;
+        background-color: #4caf50;
+        color: white;
+        font-weight: bold;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        transition: background 0.3s;
+        text-align: center;
+        text-decoration: none;
+      }
+
+      .back-btn:hover {
+        background-color: #388e3c;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar (Fully Responsive) -->
+    <nav>
+      <a href="#" class="logo">MyStore</a>
+      <ul class="menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">Shopping History</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <div class="hamburger">☰</div>
+    </nav>
+
+    <!-- Header Section -->
+    <header>
+      <h1>Shopping History</h1>
+      <p>Here you can view your past orders and details.</p>
+    </header>
+
+    <!-- Shopping History List -->
+    <div class="history-list">
+      <div class="history-item">
+        <img
+          src="https://via.placeholder.com/400x200"
+          alt="Fishing Rod - Pro Series"
+        />
+        <h3>Fishing Rod - Pro Series</h3>
+        <p>Order Date: <span>March 20, 2025</span></p>
+        <p>Order ID: <span>#123456</span></p>
+        <p class="price">$199.99</p>
+      </div>
+
+      <div class="history-item">
+        <img
+          src="https://via.placeholder.com/400x200"
+          alt="Fishing Tackle Box"
+        />
+        <h3>Fishing Tackle Box</h3>
+        <p>Order Date: <span>March 15, 2025</span></p>
+        <p>Order ID: <span>#123457</span></p>
+        <p class="price">$49.99</p>
+      </div>
+
+      <div class="history-item">
+        <img src="https://via.placeholder.com/400x200" alt="Fishing Boots" />
+        <h3>Fishing Boots</h3>
+        <p>Order Date: <span>March 10, 2025</span></p>
+        <p>Order ID: <span>#123458</span></p>
+        <p class="price">$89.99</p>
+      </div>
+    </div>
+
+    <!-- Back Button -->
+    <a href="#" class="back-btn">Back to Shop</a>
+
+    <script>
+      // Hamburger Menu Toggle
+      document
+        .querySelector(".hamburger")
+        .addEventListener("click", function () {
+          document.querySelector(".menu").classList.toggle("active");
+        });
+
+
+      const historyList = document.querySelector('.history-list');
+
+      const shoppingHistory = JSON.parse(localStorage.getItem('shoppingHist')) || [];
+
+
+      shoppingHistory.forEach(item => {
+        const el = document.createElement('div');
+        el.className = 'history-item';
+
+        el.innerHTML = \`<img
+          src=""
+          alt=""
+        />
+        <h3>\${item.nm}</h3>
+        <p>Order Date: <span>March 15, 2025</span></p>
+        <p>Order ID: <span>#123457</span></p>
+        <p class="price">$\${item.price}</p>\`;
+
+
+        historyList.appendChild(el);
+      })
+    </script>
+  </body>
+</html>
+`)
+});
+
+
 
 
  app.get("/api/products", async (req, res) => {
