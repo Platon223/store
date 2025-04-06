@@ -1021,7 +1021,7 @@ class Purchases{
 
         
 
-        const user = allUsers.find(usr => usr.name === localStorage.getItem('loginName'));
+        const user = allUsers.find(usr => usr.name === 'Platon');
 
         const purchase = {nm: this.name, price: this.price, img: this.img, buydate: this.buydate, daysleftofshipping: this.daysleftofshipping};
 
