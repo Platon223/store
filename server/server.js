@@ -953,7 +953,7 @@ app.get('/cart', async (req, res) => {
         </div>
     </footer>
 
-    <script src="https://store-7.onrender.com/socket.io/socket.io.js"></script>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 
     <script>
 
