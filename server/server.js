@@ -957,7 +957,7 @@ app.get('/cart', async (req, res) => {
 
     <script>
 
-        const socket = io('https://store-4-rc42.onrender.com')
+        const socket = io('https://store-7.onrender.com')
     
         let cart = JSON.parse(localStorage.getItem('cart-body'));
         const summary = document.querySelector('.cart-items');
