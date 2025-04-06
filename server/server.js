@@ -1006,6 +1006,37 @@ app.get('/cart', async (req, res) => {
 }
 
 
+class Purchases{
+    constructor(name, price, img, buydate, daysleftofshipping) {
+        this.name = name;
+        this.price = price;
+        this.img = img;
+        this.buydate = buydate;
+        this.daysleftofshipping = daysleftofshipping;
+    }
+
+    async fetchPurchases() {
+        const response = await fetch('https://store-7.onrender.com/users');
+        const allUsers = await response.json();
+
+        if(localStorage.getItem('loginName') === null) window.location.href = "https://mer-fish.netlify.app/login";
+
+        const user = allUsers.find(usr => usr.name === localStorage.getItem('loginName'));
+
+        const purchase = {nm: this.name, price: this.price, img: this.img, buydate: this.buydate, daysleftofshipping: this.daysleftofshipping};
+
+
+
+        user.purchases.push(purchase);
+
+        const uptadedUser = {email: user.email, password: user.password, name: user.name, purchases: user.purchases};
+
+
+        socket.emit('purchase', uptadedUser);
+    }
+}
+
+
 
 
 function toShopHistory() {
@@ -1014,11 +1045,11 @@ function toShopHistory() {
 
 
     previousShop.forEach(item => {
-        shopHist.push(item);
+        new Purchases(item.nm, item.price, 'test', new Date().getFullYear(), 'TBD').fetchPurchases();
 
     });
 
-    localStorage.setItem('shoppingHist', JSON.stringify(shopHist));
+    
 
     
 }
