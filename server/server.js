@@ -1019,7 +1019,7 @@ class Purchases{
         const response = await fetch('https://store-7.onrender.com/users');
         const allUsers = await response.json();
 
-        if(localStorage.getItem('loginName') === null) window.location.href = "https://mer-fish.netlify.app/login";
+        
 
         const user = allUsers.find(usr => usr.name === localStorage.getItem('loginName'));
 
@@ -1389,6 +1389,20 @@ io.on('connection', (socket) => {
 
     socket.on('logout-user', async (data) => {
         const deletedUser = await User.findOneAndDelete({password: data.password});
+    })
+
+    socket.on('purchase', async (data) => {
+        const filter = {name: data.name};
+        const uptade = {
+            $set: {
+                email: data.email,
+                password: data.password,
+                name: data.name,
+                purchases: data.purchases
+            }
+        }
+
+        const result = await User.uptadeOne(filter, uptade);
     })
 
 
