@@ -1407,7 +1407,7 @@ io.on('connection', (socket) => {
             }
         }
 
-        const result = await User.uptadeOne(filter, uptade);
+        const result = await User.updateOne(filter, uptade);
     })
 
 
