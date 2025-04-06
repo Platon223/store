@@ -956,6 +956,9 @@ app.get('/cart', async (req, res) => {
     <script src="https://store-4-rc42.onrender.com/socket.io/socket.io.js"></script>
 
     <script>
+
+        const socket = io('https://store-4-rc42.onrender.com')
+    
         let cart = JSON.parse(localStorage.getItem('cart-body'));
         const summary = document.querySelector('.cart-items');
         let totalPrice = 0;
