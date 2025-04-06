@@ -18,7 +18,13 @@ const productSchema = new mongoose.Schema({
 const userSchema = new mongoose.Schema({
     email: String,
     password: String,
-    name: String
+    name: String,
+    purchases: {
+        type: [
+            {nm: String, price: String, img: String, buydate: String, daysleftofshipping: String}
+        ],
+        required: true
+    }
 });
 
 
