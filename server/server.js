@@ -953,6 +953,8 @@ app.get('/cart', async (req, res) => {
         </div>
     </footer>
 
+    <script src="https://store-4-rc42.onrender.com/socket.io/socket.io.js"></script>
+
     <script>
         let cart = JSON.parse(localStorage.getItem('cart-body'));
         const summary = document.querySelector('.cart-items');
