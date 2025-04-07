@@ -674,6 +674,10 @@ app.get('/search/rods', async (req, res) => {
 `)
 });
 
+app.get('/admin', async (req, res) => {
+    res.send('admin-page');
+})
+
 
 app.get('/cart', async (req, res) => {
     res.send(`
