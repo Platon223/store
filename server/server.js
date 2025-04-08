@@ -675,7 +675,293 @@ app.get('/search/rods', async (req, res) => {
 });
 
 app.get('/admin', async (req, res) => {
-    res.send('admin-page');
+    const allUsers = await User.find();
+    res.send(`<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #121212;
+        color: #f5f5f5;
+      }
+
+      /* Navbar */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #1e1e1e;
+        padding: 15px 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #4caf50;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 20px;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .nav-links a:hover {
+        color: #4caf50;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 30px auto;
+        padding: 20px;
+        background: #1e1e1e;
+        border-radius: 10px;
+      }
+
+      h2 {
+        color: #4caf50;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #333;
+        padding-bottom: 10px;
+      }
+
+      form {
+        margin-bottom: 30px;
+      }
+
+      .input-group {
+        margin-bottom: 15px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        background: #333;
+        border: 1px solid #444;
+        color: white;
+      }
+
+      button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+        margin-right: 10px;
+        margin-top: 10px;
+      }
+
+      .green-btn {
+        background: #4caf50;
+        color: white;
+      }
+
+      .green-btn:hover {
+        background: #388e3c;
+      }
+
+      .blue-btn {
+        background: #2196f3;
+        color: white;
+      }
+
+      .blue-btn:hover {
+        background: #1976d2;
+      }
+
+      .red-btn {
+        background: #f44336;
+        color: white;
+      }
+
+      .red-btn:hover {
+        background: #c62828;
+      }
+
+      .order-card {
+        background: #2a2a2a;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+
+      .order-buttons {
+        display: flex;
+        justify-content: flex-start;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      @media (max-width: 600px) {
+        .nav-links {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .order-buttons {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">Pl_Soft Admin</div>
+      <ul class="nav-links">
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">Orders</a></li>
+        <li><a href="#">Logout</a></li>
+      </ul>
+    </nav>
+
+    <div class="container">
+      <!-- Add Product -->
+      <h2>Add Product</h2>
+      <form>
+        <div class="input-group">
+          <label>Product Name</label><input type="text" />
+        </div>
+        <div class="input-group">
+          <label>Description</label><input type="text" />
+        </div>
+        <div class="input-group">
+          <label>Image URL</label><input type="text" />
+        </div>
+        <div class="input-group"><label>Price</label><input type="text" /></div>
+        <div class="input-group">
+          <label>Category</label><input type="text" />
+        </div>
+        <div class="input-group"><label>Stock</label><input type="text" /></div>
+        <button class="green-btn" type="submit">Add Product</button>
+      </form>
+
+      <!-- Delete Product -->
+      <h2>Delete Product</h2>
+      <form>
+        <div class="input-group">
+          <label>Product Name</label><input type="text" />
+        </div>
+        <button class="red-btn" type="submit">Delete Product</button>
+      </form>
+
+      <!-- Orders -->
+      <h2>Manage Orders</h2>
+
+      <div class="allOrders">
+        <div class="order-card">
+          <form>
+            <div class="input-group">
+              <label>Order ID</label><input type="text" value="ORD-001" />
+            </div>
+            <div class="input-group">
+              <label>Customer Name</label><input type="text" value="John Doe" />
+            </div>
+            <div class="input-group">
+              <label>Product</label><input type="text" value="Fishing Rod" />
+            </div>
+            <div class="input-group">
+              <label>Quantity</label><input type="number" value="2" />
+            </div>
+            <div class="input-group">
+              <label>Status</label><input type="text" value="Processing" />
+            </div>
+            <div class="order-buttons">
+              <button class="blue-btn" type="submit">Submit Changes</button>
+              <button class="red-btn" type="button">Delete Order</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Order 2 -->
+        <div class="order-card">
+          <form>
+            <div class="input-group">
+              <label>Order ID</label><input type="text" value="ORD-002" />
+            </div>
+            <div class="input-group">
+              <label>Customer Name</label
+              ><input type="text" value="Alice Smith" />
+            </div>
+            <div class="input-group">
+              <label>Product</label><input type="text" value="Bait Pack" />
+            </div>
+            <div class="input-group">
+              <label>Quantity</label><input type="number" value="1" />
+            </div>
+            <div class="input-group">
+              <label>Status</label><input type="text" value="Shipped" />
+            </div>
+            <div class="order-buttons">
+              <button class="blue-btn" type="submit">Submit Changes</button>
+              <button class="red-btn" type="button">Delete Order</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+      const users = ${JSON.stringify(allUsers)};
+
+      const orderZone = document.querySelector('.allOrders');
+      
+      users.purchases.forEach(purch => {
+      const el = document.createElement('div'); el.className ="order-card"; 
+      el.innerHTML = \`
+        <div class="input-group">
+          <label>Order ID</label><input type="text" value="\${purch.nm}" />
+        </div>
+        <div class="input-group">
+          <label>Customer Name</label><input type="text" value="\${purch.price}" />
+        </div>
+        <div class="input-group">
+          <label>Product</label><input type="text" value="\${purch.buydate}" />
+        </div>
+        <div class="input-group">
+          <label>Quantity</label><input type="number" value="\${purch.daysleftofshipping}" />
+        </div>
+        <div class="input-group">
+          <label>Status</label><input type="text" value="\${purch.nm}" />
+        </div>
+        <div class="order-buttons">
+          <button class="blue-btn" type="submit">Submit Changes</button>
+          <button class="red-btn" type="button">Delete Order</button>
+        </div>
+    \`;
+
+    orderZone.appendChild(el);
+})
+  
+  </script>
+</html>`);
 })
 
 
@@ -1072,7 +1358,10 @@ function toShopHistory() {
 });
 
 
-app.get('/shop-history', (req, res) => {
+app.get('/shop-history', async (req, res) => {
+    const allUsers = await User.find();
+
+    
     res.send(`<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -1329,10 +1618,10 @@ app.get('/shop-history', (req, res) => {
 
       const historyList = document.querySelector('.history-list');
 
-      const shoppingHistory = JSON.parse(localStorage.getItem('shoppingHist')) || [];
+      const shoppingHistory = ${JSON.stringify(allUsers)};
 
 
-      shoppingHistory.forEach(item => {
+      shoppingHistory.purchases.forEach(item => {
         const el = document.createElement('div');
         el.className = 'history-item';
 
