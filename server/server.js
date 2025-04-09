@@ -932,6 +932,21 @@ app.get('/admin', async (req, res) => {
       const users = ${JSON.stringify(allUsers)};
 
       const orderZone = document.querySelector('.allOrders');
+
+      class UpdateStatus{
+            constructor(status) {
+                this.status = status;
+        
+            }
+        
+            uptade() {
+                purch.daysleftofshipping = this.status;
+        
+                const uptadedUser = {email: user.email, password: user.password, name: user.name, purchases: user.purchases};
+        
+                socket.emit('purchase', uptadedUser);
+            }
+    }
       
       users.forEach(user => {
       if(user.purchases && Array.isArray(user.purchases)) {
@@ -939,22 +954,22 @@ app.get('/admin', async (req, res) => {
                const el = document.createElement('div'); el.className ="order-card"; 
               el.innerHTML = \`
                 <div class="input-group">
-                  <label>Order ID</label><input type="text" value="\${purch.nm}" />
+                  <label>Order ID</label><input type="text" value="\${purch.nm}" readonly />
                 </div>
                 <div class="input-group">
-                  <label>Customer Name</label><input type="text" value="\${user.name}" />
+                  <label>Customer Name</label><input type="text" value="\${user.name}" readonly/>
                 </div>
                 <div class="input-group">
-                  <label>Product</label><input type="text" value="\${purch.nm}" />
+                  <label>Product</label><input type="text" value="\${purch.nm}" readonly/>
                 </div>
                 <div class="input-group">
-                  <label>Quantity</label><input type="number" value="\${purch.daysleftofshipping}" />
+                  <label>Quantity</label><input type="number" value="\${purch.daysleftofshipping}" readonly/>
                 </div>
                 <div class="input-group">
-                  <label>Status</label><input type="text" value="\${purch.nm}" />
+                  <label>Status</label><input id="status" type="text" value="\${purch.nm}" />
                 </div>
                 <div class="order-buttons">
-                  <button class="blue-btn" type="submit">Submit Changes</button>
+                  <button class="blue-btn" onclick="" type="submit">Submit Changes</button>
                   <button class="red-btn" type="button">Delete Order</button>
                 </div>
             \`;
