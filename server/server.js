@@ -933,32 +933,37 @@ app.get('/admin', async (req, res) => {
 
       const orderZone = document.querySelector('.allOrders');
       
-      users.purchases.forEach(purch => {
-      const el = document.createElement('div'); el.className ="order-card"; 
-      el.innerHTML = \`
-        <div class="input-group">
-          <label>Order ID</label><input type="text" value="\${purch.nm}" />
-        </div>
-        <div class="input-group">
-          <label>Customer Name</label><input type="text" value="\${purch.price}" />
-        </div>
-        <div class="input-group">
-          <label>Product</label><input type="text" value="\${purch.buydate}" />
-        </div>
-        <div class="input-group">
-          <label>Quantity</label><input type="number" value="\${purch.daysleftofshipping}" />
-        </div>
-        <div class="input-group">
-          <label>Status</label><input type="text" value="\${purch.nm}" />
-        </div>
-        <div class="order-buttons">
-          <button class="blue-btn" type="submit">Submit Changes</button>
-          <button class="red-btn" type="button">Delete Order</button>
-        </div>
-    \`;
-
-    orderZone.appendChild(el);
-})
+      users.forEach(user => {
+      if(user.purchases && Array.isArray(user.purchases)) {
+          user.purchases.forEach(purch => {
+               const el = document.createElement('div'); el.className ="order-card"; 
+              el.innerHTML = \`
+                <div class="input-group">
+                  <label>Order ID</label><input type="text" value="\${purch.nm}" />
+                </div>
+                <div class="input-group">
+                  <label>Customer Name</label><input type="text" value="\${user.name}" />
+                </div>
+                <div class="input-group">
+                  <label>Product</label><input type="text" value="\${purch.nm}" />
+                </div>
+                <div class="input-group">
+                  <label>Quantity</label><input type="number" value="\${purch.daysleftofshipping}" />
+                </div>
+                <div class="input-group">
+                  <label>Status</label><input type="text" value="\${purch.nm}" />
+                </div>
+                <div class="order-buttons">
+                  <button class="blue-btn" type="submit">Submit Changes</button>
+                  <button class="red-btn" type="button">Delete Order</button>
+                </div>
+            \`;
+        
+            orderZone.appendChild(el);
+          })
+      }
+     
+      })
   
   </script>
 </html>`);
@@ -1620,8 +1625,10 @@ app.get('/shop-history', async (req, res) => {
 
       const shoppingHistory = ${JSON.stringify(allUsers)};
 
+      const user = shoppingHistory.find(usr => usr.password === '12345');
 
-      shoppingHistory.purchases.forEach(item => {
+
+      user.purchases.forEach(item => {
         const el = document.createElement('div');
         el.className = 'history-item';
 
