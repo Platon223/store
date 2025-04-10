@@ -933,29 +933,7 @@ app.get('/admin', async (req, res) => {
 
       const orderZone = document.querySelector('.allOrders');
 
-      class UpdateStatus{
-            constructor(status) {
-                this.status = status;
-        
-            }
-        
-            update() {
-                purch.daysleftofshipping = this.status;
-        
-                const uptadedUser = {email: user.email, password: user.password, name: user.name, purchases: user.purchases};
-        
-                socket.emit('purchase', uptadedUser);
-            }
-    }
-
-    function handleChange(button) {
-        const card = button.closest('.order-card');
-        const statusInput = card.querySelector('#status');
-        const inputValue = statusInput.value;
-    
-        new UpdateStatus(inputValue).update();
-
-    }
+      
       
       users.forEach(user => {
       if(user.purchases && Array.isArray(user.purchases)) {
@@ -978,19 +956,46 @@ app.get('/admin', async (req, res) => {
                   <label>Status</label><input id="status" type="text" value="\${purch.nm}" />
                 </div>
                 <div class="order-buttons">
-                  <button class="blue-btn" onclick="handleChange(this)" type="submit">Submit Changes</button>
-                  <button class="red-btn" type="button">Delete Order</button>
-                </div>
-            \`;
-        
-            orderZone.appendChild(el);
-          })
-      }
-     
-      })
-  
-  </script>
-</html>`);
+                  <button class="blue-btn" onclick="
+                  class UpdateStatus{
+                        constructor(status) {
+                            this.status = status;
+                    
+                        }
+                    
+                        update() {
+                            \${purch.daysleftofshipping} = this.status;
+                    
+                            const uptadedUser = {email: \${user.email}, password: \${user.password}, name: \${user.name}, purchases: \${user.purchases}};
+                    
+                            socket.emit('purchase', uptadedUser);
+                        }
+                }
+
+                function handleChange(button) {
+                    const card = button.closest('.order-card');
+                    const statusInput = card.querySelector('#status');
+                    const inputValue = statusInput.value;
+                
+                    new UpdateStatus(inputValue).update();
+            
+                }
+
+                handleChange(this);
+                
+                " type="submit">Submit Changes</button>
+                              <button class="red-btn" type="button">Delete Order</button>
+                            </div>
+                        \`;
+                    
+                        orderZone.appendChild(el);
+                      })
+                  }
+                 
+                  })
+              
+              </script>
+            </html>`);
 })
 
 
