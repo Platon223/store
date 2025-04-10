@@ -947,6 +947,15 @@ app.get('/admin', async (req, res) => {
                 socket.emit('purchase', uptadedUser);
             }
     }
+
+    function handleChange(button) {
+        const card = button.closest('.order-card');
+        const statusInput = card.querySelector('#status');
+        const inputValue = statusInput.value;
+    
+        new UptadeStatus(inputValue).update();
+
+    }
       
       users.forEach(user => {
       if(user.purchases && Array.isArray(user.purchases)) {
@@ -969,7 +978,7 @@ app.get('/admin', async (req, res) => {
                   <label>Status</label><input id="status" type="text" value="\${purch.nm}" />
                 </div>
                 <div class="order-buttons">
-                  <button class="blue-btn" onclick="" type="submit">Submit Changes</button>
+                  <button class="blue-btn" onclick="handleChange(this)" type="submit">Submit Changes</button>
                   <button class="red-btn" type="button">Delete Order</button>
                 </div>
             \`;
