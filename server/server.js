@@ -953,7 +953,7 @@ app.get('/admin', async (req, res) => {
         const statusInput = card.querySelector('#status');
         const inputValue = statusInput.value;
     
-        new UptadeStatus(inputValue).update();
+        new UpdateStatus(inputValue).update();
 
     }
       
