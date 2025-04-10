@@ -939,7 +939,7 @@ app.get('/admin', async (req, res) => {
         
             }
         
-            uptade() {
+            update() {
                 purch.daysleftofshipping = this.status;
         
                 const uptadedUser = {email: user.email, password: user.password, name: user.name, purchases: user.purchases};
