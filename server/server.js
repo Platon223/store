@@ -933,6 +933,37 @@ app.get('/admin', async (req, res) => {
 
       const orderZone = document.querySelector('.allOrders');
 
+      class UpdateStatus{
+                        constructor(status, purchase, email, password, name, purchases) {
+                            this.status = status;
+                            this.purchase = purchase;
+                            this.email = email;
+                            this.password = password;
+                            this.name = name;
+                            this.purchases = purchases;
+                    
+                        }
+                    
+                        update() {
+                            this.purchase.daysleftofshipping = this.status;
+                    
+                            const uptadedUser = {email: this.email, password: this.password, name: this.name, purchases: this.purchases};
+                    
+                            socket.emit('purchase', uptadedUser);
+                        }
+                }
+
+                function handleChange(button, purchase, email, password, name, purchases) {
+                    const card = button.closest('.order-card');
+                    const statusInput = card.querySelector('#status');
+                    const inputValue = statusInput.value;
+
+                    console.log('hello');
+                
+                    new UpdateStatus(inputValue, purchase, email, password, name, purchases).update();
+            
+                }
+
       
       
       users.forEach(user => {
@@ -956,36 +987,7 @@ app.get('/admin', async (req, res) => {
                   <label>Status</label><input id="status" type="text" value="\${purch.nm}" />
                 </div>
                 <div class="order-buttons">
-                  <button class="blue-btn" onclick="
-                  class UpdateStatus{
-                        constructor(status) {
-                            this.status = status;
-                    
-                        }
-                    
-                        update() {
-                            \${purch.daysleftofshipping} = this.status;
-                    
-                            const uptadedUser = {email: \${user.email}, password: \${user.password}, name: \${user.name}, purchases: \${user.purchases}};
-                    
-                            socket.emit('purchase', uptadedUser);
-                        }
-                }
-
-                function handleChange(button) {
-                    const card = button.closest('.order-card');
-                    const statusInput = card.querySelector('#status');
-                    const inputValue = statusInput.value;
-
-                    console.log('hello');
-                
-                    new UpdateStatus(inputValue).update();
-            
-                }
-
-                handleChange(this);
-                
-                " type="submit">Submit Changes</button>
+                  <button class="blue-btn" onclick="handleChange(this, \${purch}, \${user.email}, \${user.password}, \${user.name}, \${user.purchases});" type="submit">Submit Changes</button>
                               <button class="red-btn" type="button">Delete Order</button>
                             </div>
                         \`;
