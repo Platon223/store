@@ -987,10 +987,18 @@ app.get('/admin', async (req, res) => {
                   <label>Status</label><input id="status" type="text" value="\${purch.nm}" />
                 </div>
                 <div class="order-buttons">
-                  <button class="blue-btn" onclick="handleChange(this, \${purch}, \${user.email}, \${user.password}, \${user.name}, \${user.purchases});" type="submit">Submit Changes</button>
+                  <button class="blue-btn" type="submit">Submit Changes</button>
                               <button class="red-btn" type="button">Delete Order</button>
                             </div>
                         \`;
+
+                        const button = el.querySelector('.blue-btn');
+                        const inputZone = button.closest('.order-card');
+                        const inputChange = inputZone.querySelector('#status');
+                        const inputValue = inputChange.value;
+                        button.addEventListener(() => {
+                            handleChange(inputValue, \${purch}, \${user.email}, \${user.password}, \${user.name}, \${user.purchases});
+                        })
                     
                         orderZone.appendChild(el);
                       })
