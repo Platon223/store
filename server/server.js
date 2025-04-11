@@ -976,6 +976,8 @@ app.get('/admin', async (req, res) => {
                     const card = button.closest('.order-card');
                     const statusInput = card.querySelector('#status');
                     const inputValue = statusInput.value;
+
+                    console.log('hello');
                 
                     new UpdateStatus(inputValue).update();
             
