@@ -945,7 +945,10 @@ app.get('/admin', async (req, res) => {
                         }
                     
                         update() {
-                            this.purchase.daysleftofshipping = this.status;
+                            const index = this.purchases.findIndex(prch => prch.nm === this.purchase.nm);
+
+                            this.purchases[index].daysleftofshipping = this.status;
+                            
                     
                             const uptadedUser = {email: this.email, password: this.password, name: this.name, purchases: this.purchases};
                     
