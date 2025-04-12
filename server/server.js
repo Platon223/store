@@ -967,11 +967,11 @@ app.get('/admin', async (req, res) => {
       if(user.purchases && Array.isArray(user.purchases)) {
           user.purchases.forEach(purch => {
                const el = document.createElement('div'); el.className ="order-card"; 
-               const pur = JSON.stringify(purch);
-               const email = JSON.stringify(user.email);
-               const password = JSON.stringify(user.password);
-               const name = JSON.stringify(user.name);
-               const purchases = JSON.stringify(user.purchases);
+               const pur = purch;
+               const email = user.email;
+               const password = user.password;
+               const name = user.name;
+               const purchases = user.purchases;
               el.innerHTML = \`
                 <div class="input-group">
                   <label>Order ID</label><input type="text" value="\${purch.nm}" readonly />
