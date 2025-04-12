@@ -997,7 +997,7 @@ app.get('/admin', async (req, res) => {
                         const inputChange = inputZone.querySelector('#status');
                         const inputValue = inputChange.value;
                         button.addEventListener('click', () => {
-                            handleChange(inputValue, \${purch}, \${user.email}, \${user.password}, \${user.name}, \${user.purchases});
+                            handleChange(inputValue, \${JSON.stringify(purch)}, \${JSON.stringify(user.email)}, \${JSON.stringify(user.password)}, \${JSON.stringify(user.name)}, \${JSON.stringify(user.purchases)});
                         })
                     
                         orderZone.appendChild(el);
