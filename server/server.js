@@ -996,7 +996,7 @@ app.get('/admin', async (req, res) => {
                         const inputZone = button.closest('.order-card');
                         const inputChange = inputZone.querySelector('#status');
                         const inputValue = inputChange.value;
-                        button.addEventListener(() => {
+                        button.addEventListener('click', () => {
                             handleChange(inputValue, \${purch}, \${user.email}, \${user.password}, \${user.name}, \${user.purchases});
                         })
                     
