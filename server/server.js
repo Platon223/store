@@ -953,10 +953,7 @@ app.get('/admin', async (req, res) => {
                         }
                 }
 
-                function handleChange(button, purchase, email, password, name, purchases) {
-                    const card = button.closest('.order-card');
-                    const statusInput = card.querySelector('#status');
-                    const inputValue = statusInput.value;
+                function handleChange(inputValue, purchase, email, password, name, purchases) {
 
                     console.log('hello');
                 
