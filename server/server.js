@@ -970,7 +970,7 @@ app.get('/admin', async (req, res) => {
       if(user.purchases && Array.isArray(user.purchases)) {
           user.purchases.forEach(purch => {
                const el = document.createElement('div'); el.className ="order-card"; 
-               const purch = JSON.stringify(purch);
+               const pur = JSON.stringify(purch);
                const email = JSON.stringify(user.email);
                const password = JSON.stringify(user.password);
                const name = JSON.stringify(user.name);
@@ -1002,7 +1002,7 @@ app.get('/admin', async (req, res) => {
                         const inputChange = inputZone.querySelector('#status');
                         const inputValue = inputChange.value;
                         button.addEventListener('click', () => {
-                            handleChange(inputValue, \${purch}, \${email}, \${password}, \${name}, \${purchases});
+                            handleChange(inputValue, \${pur}, \${email}, \${password}, \${name}, \${purchases});
                         })
                     
                         orderZone.appendChild(el);
