@@ -1749,6 +1749,7 @@ io.on('connection', (socket) => {
     })
 
     socket.on('purchase', async (data) => {
+        console.log(data);
         const filter = {name: data.name};
         const uptade = {
             $set: {
