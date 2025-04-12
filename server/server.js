@@ -926,9 +926,9 @@ app.get('/admin', async (req, res) => {
         </div>
       </div>
     </div>
-  </body>
-
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
   <script>
+  const socket = io('https://store-7.onrender.com');
       const users = ${JSON.stringify(allUsers)};
 
       const orderZone = document.querySelector('.allOrders');
@@ -970,6 +970,11 @@ app.get('/admin', async (req, res) => {
       if(user.purchases && Array.isArray(user.purchases)) {
           user.purchases.forEach(purch => {
                const el = document.createElement('div'); el.className ="order-card"; 
+               const purch = JSON.stringify(purch);
+               const email = JSON.stringify(user.email);
+               const password = JSON.stringify(user.password);
+               const name = JSON.stringify(user.name);
+               const purchases = JSON.stringify(user.purchases);
               el.innerHTML = \`
                 <div class="input-group">
                   <label>Order ID</label><input type="text" value="\${purch.nm}" readonly />
@@ -997,7 +1002,7 @@ app.get('/admin', async (req, res) => {
                         const inputChange = inputZone.querySelector('#status');
                         const inputValue = inputChange.value;
                         button.addEventListener('click', () => {
-                            handleChange(inputValue, \${JSON.stringify(purch)}, \${JSON.stringify(user.email)}, \${JSON.stringify(user.password)}, \${JSON.stringify(user.name)}, \${JSON.stringify(user.purchases)});
+                            handleChange(inputValue, \${purch}, \${email}, \${password}, \${name}, \${purchases});
                         })
                     
                         orderZone.appendChild(el);
@@ -1007,6 +1012,8 @@ app.get('/admin', async (req, res) => {
                   })
               
               </script>
+  </body>
+  
             </html>`);
 })
 
