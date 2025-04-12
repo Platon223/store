@@ -992,7 +992,13 @@ app.get('/admin', async (req, res) => {
                   <label>Status</label><input id="status" type="text" value="\${purch.nm}" />
                 </div>
                 <div class="order-buttons">
-                  <button class="blue-btn" type="submit">Submit Changes</button>
+                  <button 
+                      data-purch='\${JSON.stringify(purch)}'
+                      data-email='\${user.email}'
+                      data-password='\${user.password}'
+                      data-name='\${user.name}'
+                      data-purchases='\${JSON.stringify(user.purchases)}'
+                  class="blue-btn" type="submit">Submit Changes</button>
                               <button class="red-btn" type="button">Delete Order</button>
                             </div>
                         \`;
@@ -1002,7 +1008,8 @@ app.get('/admin', async (req, res) => {
                         const inputChange = inputZone.querySelector('#status');
                         const inputValue = inputChange.value;
                         button.addEventListener('click', () => {
-                            handleChange(inputValue, \${pur}, \${email}, \${password}, \${name}, \${purchases});
+                            
+                            handleChange(inputValue, pur, email, password, name, purchases);
                         })
                     
                         orderZone.appendChild(el);
