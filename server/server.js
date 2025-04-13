@@ -928,7 +928,7 @@ app.get('/admin', async (req, res) => {
     </div>
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
   <script>
-  const socket = io('https://store-7.onrender.com');
+const socket = io('https://store-7.onrender.com');
 
         class UpdateStatus{
                         constructor(status, purchase, email, password, name, purchases) {
@@ -962,66 +962,66 @@ app.get('/admin', async (req, res) => {
                 }
       
 
-      async function displayOrders() {
-          const response = await fetch('https://store-7.onrender.com/users');
-          const users = await response.json();
+    async function displayOrders() {
+        const response = await fetch('https://store-7.onrender.com/users');
+        const users = await response.json();
 
-          const orderZone = document.querySelector('.allOrders');
+        const orderZone = document.querySelector('.allOrders');
 
-    users.forEach(user => {
-      if(user.purchases && Array.isArray(user.purchases)) {
-          user.purchases.forEach(purch => {
-               const el = document.createElement('div'); el.className ="order-card"; 
-               const pur = purch;
-               const email = user.email;
-               const password = user.password;
-               const name = user.name;
-               const purchases = user.purchases;
-              el.innerHTML = \`
-                <div class="input-group">
-                  <label>Order ID</label><input type="text" value="\${purch.nm}" readonly />
-                </div>
-                <div class="input-group">
-                  <label>Customer Name</label><input type="text" value="\${user.name}" readonly/>
-                </div>
-                <div class="input-group">
-                  <label>Product</label><input type="text" value="\${purch.nm}" readonly/>
-                </div>
-                <div class="input-group">
-                  <label>Quantity</label><input type="number" value="\${purch.daysleftofshipping}" readonly/>
-                </div>
-                <div class="input-group">
-                  <label>Status</label><input id="status" type="text" value="\${purch.nm}" />
-                </div>
-                <div class="order-buttons">
-                  <button 
-                      data-purch='\${JSON.stringify(purch)}'
-                      data-email='\${user.email}'
-                      data-password='\${user.password}'
-                      data-name='\${user.name}'
-                      data-purchases='\${JSON.stringify(user.purchases)}'
-                  class="blue-btn" type="submit">Submit Changes</button>
-                              <button class="red-btn" type="button">Delete Order</button>
-                            </div>
-                        \`;
+        users.forEach(user => {
+            if(user.purchases && Array.isArray(user.purchases)) {
+                user.purchases.forEach(purch => {
+                    const el = document.createElement('div'); el.className ="order-card"; 
+                    const pur = purch;
+                    const email = user.email;
+                    const password = user.password;
+                    const name = user.name;
+                    const purchases = user.purchases;
+                    el.innerHTML = \`
+                        <div class="input-group">
+                        <label>Order ID</label><input type="text" value="\${purch.nm}" readonly />
+                        </div>
+                        <div class="input-group">
+                        <label>Customer Name</label><input type="text" value="\${user.name}" readonly/>
+                        </div>
+                        <div class="input-group">
+                        <label>Product</label><input type="text" value="\${purch.nm}" readonly/>
+                        </div>
+                        <div class="input-group">
+                        <label>Quantity</label><input type="number" value="\${purch.daysleftofshipping}" readonly/>
+                        </div>
+                        <div class="input-group">
+                        <label>Status</label><input id="status" type="text" value="\${purch.nm}" />
+                        </div>
+                        <div class="order-buttons">
+                        <button 
+                           
+                        class="blue-btn" type="submit">Submit Changes</button>
+                                    <button class="red-btn" type="button">Delete Order</button>
+                                    </div>
+                                \`;
 
-                        const button = el.querySelector('.blue-btn');
-                        const inputZone = button.closest('.order-card');
-                        const inputChange = inputZone.querySelector('#status');
-                        
-                        button.addEventListener('click', () => {
-                            const inputValue = inputChange.value;
+                                const button = el.querySelector('.blue-btn');
+                                const inputZone = button.closest('.order-card');
+                                const inputChange = inputZone.querySelector('#status');
+                                
+                                button.addEventListener('click', () => {
+                                    const inputValue = inputChange.value;
+                                    
+                                    handleChange(inputValue, pur, email, password, name, purchases);
+                                })
                             
-                            handleChange(inputValue, pur, email, password, name, purchases);
-                        })
+                        orderZone.appendChild(el);
+
+                    });
+            }
+                
                     
-                orderZone.appendChild(el);
-              }
-            }); // This closes the inner forEach
-        }
-      }); // This closes the outer forEach
-    } // This closes displayOrders
-  displayOrders(); // Call the function     
+        });
+    }
+       
+     
+  displayOrders();    
               
 </script>
   </body>
