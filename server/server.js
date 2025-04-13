@@ -991,7 +991,7 @@ const socket = io('https://store-7.onrender.com');
                         <label>Quantity</label><input type="number" value="\${purch.daysleftofshipping}" readonly/>
                         </div>
                         <div class="input-group">
-                        <label>Status</label><input id="status" type="text" value="\${purch.nm}" />
+                        <label>Status</label><input id="status" type="text" value="\${purch.daysleftofshipping}" />
                         </div>
                         <div class="order-buttons">
                         <button 
