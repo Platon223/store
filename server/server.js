@@ -1022,23 +1022,11 @@ app.get('/admin', async (req, res) => {
           
       }
 
-      displayOrders();
-
-     
-
-
-
-      
-      
-    
-     
-                 
-                  })
+      displayOrders();      
               
-              </script>
+</script>
   </body>
-  
-            </html>`);
+  </html>`);
 })
 
 
