@@ -1015,15 +1015,13 @@ app.get('/admin', async (req, res) => {
                             handleChange(inputValue, pur, email, password, name, purchases);
                         })
                     
-                        orderZone.appendChild(el);
-                        }
-                      })
-
-          
-          
-      }
-
-      displayOrders();      
+                orderZone.appendChild(el);
+              }
+            }); // This closes the inner forEach
+        }
+      }); // This closes the outer forEach
+    } // This closes displayOrders
+  displayOrders(); // Call the function     
               
 </script>
   </body>
