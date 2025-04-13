@@ -1016,6 +1016,7 @@ app.get('/admin', async (req, res) => {
                         })
                     
                         orderZone.appendChild(el);
+                        }
                       })
 
           
