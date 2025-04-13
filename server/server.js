@@ -929,11 +929,8 @@ app.get('/admin', async (req, res) => {
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
   <script>
   const socket = io('https://store-7.onrender.com');
-      const users = ${JSON.stringify(allUsers)};
 
-      const orderZone = document.querySelector('.allOrders');
-
-      class UpdateStatus{
+        class UpdateStatus{
                         constructor(status, purchase, email, password, name, purchases) {
                             this.status = status;
                             this.purchase = purchase;
@@ -963,10 +960,15 @@ app.get('/admin', async (req, res) => {
                     new UpdateStatus(inputValue, purchase, email, password, name, purchases).update();
             
                 }
+      
 
-      
-      
-      users.forEach(user => {
+      async function displayOrders() {
+          const response = await fetch('https://store-7.onrender.com/users');
+          const users = await response.json();
+
+          const orderZone = document.querySelector('.allOrders');
+
+    users.forEach(user => {
       if(user.purchases && Array.isArray(user.purchases)) {
           user.purchases.forEach(purch => {
                const el = document.createElement('div'); el.className ="order-card"; 
@@ -1015,6 +1017,20 @@ app.get('/admin', async (req, res) => {
                     
                         orderZone.appendChild(el);
                       })
+
+          
+          
+      }
+
+      displayOrders();
+
+     
+
+
+
+      
+      
+    
                   }
                  
                   })
